@@ -20,7 +20,6 @@
   })
   
   listTasks.addEventListener('click', moveTask);
-/*  listTasks.addEventListener('click', deleteTask);*/
   listTasks.addEventListener('click', function() {
     deleteTask(listTasks);
   });
@@ -39,6 +38,7 @@
     } else {
       let itemTask = document.querySelector('.task').cloneNode(true);
       itemTask.querySelector('label').innerText = taskValue;
+/*      itemTask.querySelector('.edit').addEventListener('click', editTask);*/
       listTasks.appendChild(itemTask);
       document.getElementById('new-task').value = '';
     }
@@ -65,21 +65,21 @@
     itemTask.querySelector('label').innerText = this.value;
   }
 
-
 /*При нажатии на Checkbox переместить задачу*/
-  function moveTask (event) {
+  function moveTask(event) {
     if (event.target.matches('#incomplete-tasks li .checkbox')) {
       document.getElementById('completed-tasks').appendChild(event.target.parentElement);
     } else {
-      document.getElementById('incomplete-tasks').appendChild(event.target.parentElement);
+      if (event.target.matches('#completed-tasks li .checkbox')) {
+        document.getElementById('incomplete-tasks').appendChild(event.target.parentElement);
+      }
     }
   }
 
 /*Удалить задачу, кнопка [Delete]*/
-  function deleteTask (list) {
+  function deleteTask(list) {
     if (event.target.matches('.delete')) {
       list.removeChild(event.target.parentElement);
     }
   }
 })();
-
